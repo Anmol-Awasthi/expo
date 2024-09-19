@@ -205,6 +205,10 @@ export interface ExpoConfig {
         requestHeaders?: {
             [k: string]: any;
         };
+        /**
+         * Array of glob patterns specifying which files should be included in updates. Defaults to all asset files when not supplied or empty.
+         */
+        assetPatternsToBeBundled?: string[];
     };
     /**
      * Provide overrides by locale for System Dialog prompts like Permissions Boxes
@@ -303,7 +307,7 @@ export interface Splash {
  */
 export interface IOS {
     /**
-     * The Apple development team ID to use for all build configurations.
+     * The Apple development team ID to use for all native targets. You can find your team ID in [the Apple Developer Portal](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/).
      */
     appleTeamId?: string;
     /**

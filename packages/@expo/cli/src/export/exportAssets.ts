@@ -18,9 +18,17 @@ function mapAssetHashToAssetString(asset: Asset, hash: string) {
 export function assetPatternsToBeBundled(
   exp: ExpoConfig & { extra?: { updates?: { assetPatternsToBeBundled?: string[] } } }
 ): string[] | undefined {
-  return exp?.extra?.updates?.assetPatternsToBeBundled?.length
-    ? exp?.extra?.updates?.assetPatternsToBeBundled
-    : undefined;
+  // new location for this key
+  if (exp.updates?.assetPatternsToBeBundled?.length) {
+    return exp.updates.assetPatternsToBeBundled;
+  }
+
+  // old, untyped location for this key. we may want to change this to throw in a few SDK versions (deprecated as of SDK 52).
+  if (exp.extra?.updates?.assetPatternsToBeBundled?.length) {
+    return exp.extra.updates.assetPatternsToBeBundled;
+  }
+
+  return undefined;
 }
 
 /**
