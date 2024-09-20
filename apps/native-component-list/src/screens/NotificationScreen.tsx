@@ -152,15 +152,17 @@ export default class NotificationScreen extends React.Component<
         <HeadingText>Notification triggers debugging</HeadingText>
         <ListButton
           onPress={() =>
-            Notifications.getNextTriggerDateAsync({ seconds: 10 }).then((timestamp) =>
-              alert(new Date(timestamp!))
-            )
+            Notifications.getNextTriggerDateAsync({
+              type: Notifications.CalendarTriggerTypes.TIME_INTERVAL,
+              seconds: 10,
+            }).then((timestamp) => alert(new Date(timestamp!)))
           }
           title="Get next date for time interval + 10 seconds"
         />
         <ListButton
           onPress={() =>
             Notifications.getNextTriggerDateAsync({
+              type: Notifications.CalendarTriggerTypes.DAILY,
               hour: 9,
               minute: 0,
               repeats: true,
@@ -171,6 +173,7 @@ export default class NotificationScreen extends React.Component<
         <ListButton
           onPress={() =>
             Notifications.getNextTriggerDateAsync({
+              type: Notifications.CalendarTriggerTypes.WEEKLY,
               hour: 9,
               minute: 0,
               weekday: 1,
@@ -262,6 +265,7 @@ export default class NotificationScreen extends React.Component<
         sound: true,
       },
       trigger: {
+        type: Notifications.CalendarTriggerTypes.TIME_INTERVAL,
         seconds: 10,
       },
     });
@@ -286,6 +290,7 @@ export default class NotificationScreen extends React.Component<
         sound: 'cat.wav',
       },
       trigger: {
+        type: Notifications.CalendarTriggerTypes.TIME_INTERVAL,
         channelId: 'custom-sound',
         seconds: 1,
       },
@@ -301,6 +306,7 @@ export default class NotificationScreen extends React.Component<
         sound: true,
       },
       trigger: {
+        type: Notifications.CalendarTriggerTypes.TIME_INTERVAL,
         seconds: 10,
       },
     });
